@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   
-  uni_links2_platform_interface: ^1.0.0+2
+  uni_links_platform_interface: ^1.0.0
 
 dev_dependencies:
   flutter_test:

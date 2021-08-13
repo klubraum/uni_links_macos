@@ -26,20 +26,24 @@ public class UniLinksMacosPlugin: NSObject, FlutterPlugin, FlutterStreamHandler 
     
     public func application(_ application: NSApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([NSUserActivityRestoring]) -> Void) -> Bool {
         
+        NSLog("Klubraum | Got useractivity \(userActivity.activityType)")
+        
         guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
               let incomingUrl = userActivity.webpageURL?.absoluteString
         else {
             return false;
         }
-        
+
+        NSLog("Klubraum | incomingUrl \(incomingUrl)")
+
         self.latestLink = incomingUrl;
-        if (_eventSink == nil) {
+        if (self.initialLink == nil) {
             self.initialLink = self.latestLink;
         }
         return true;
         
     }
-    
+
     public func handleEvent(_ event: NSAppleEventDescriptor!, withReplyEvent: NSAppleEventDescriptor!) {
         guard let urlString = event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue else { return };
         
